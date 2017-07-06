@@ -1,0 +1,421 @@
+<%= stylesheet_link_tag 'our_slider_feed_insta.css' %>
+
+
+<!-- TODO SLIDER INSTAGRAM -->
+<style media="screen">
+
+
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // $('#itemslider').carousel({ interval: 3000 });
+
+  $('.carousel-showmanymoveone .item').each(function(){
+    var itemToClone = $(this);
+
+    for (var i=1;i<6;i++) {
+      itemToClone = itemToClone.next();
+
+      if (!itemToClone.length) {
+        itemToClone = $(this).siblings(':first');
+      }
+
+      itemToClone.children(':first-child').clone()
+      .addClass("cloneditem-"+(i))
+      .appendTo($(this));
+    }
+  });
+});
+
+</script>
+<!-- Item slider-->
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="carousel carousel-showmanymoveone slide sliderImagesSection" id="itemslider">
+
+        <button type="button" class="slick-prev slick-arrow arrow" aria-disabled="false" style="display: block;"></button>
+
+
+        <div class="carousel-inner sliderImagesSection">
+          <div class="item active ng-scope slick-slide slick-active">
+            <div class="col-xs-12 col-sm-6 col-md-2">
+              <div class="imgContainer ng-scope slick-slide slick-active" >
+                <%= image_tag "image_01.jpg", :class=>"img-responsive center-block" %>
+                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(1)">
+                  <div class="wrap">
+                    <div class="likes ng-binding">6</div>
+                    <div class="comments ng-binding">0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item ng-scope slick-slide slick-active">
+            <div class="col-xs-12 col-sm-6 col-md-2">
+              <div class="imgContainer ng-scope slick-slide slick-active" >
+                <%= image_tag "image_02.jpg", :class=>"img-responsive center-block" %>
+                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(2)">
+                  <div class="wrap">
+                    <div class="likes ng-binding">6</div>
+                    <div class="comments ng-binding">0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item ng-scope slick-slide slick-active">
+            <div class="col-xs-12 col-sm-6 col-md-2">
+              <div class="imgContainer ng-scope slick-slide slick-active" >
+                <%= image_tag "image_03.jpg", :class=>"img-responsive center-block" %>
+                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(3)">
+                  <div class="wrap">
+                    <div class="likes ng-binding">6</div>
+                    <div class="comments ng-binding">0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item ng-scope slick-slide slick-active">
+            <div class="col-xs-12 col-sm-6 col-md-2">
+              <div class="imgContainer ng-scope slick-slide slick-active" >
+                <%= image_tag "image_02.jpg", :class=>"img-responsive center-block" %>
+                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(4)">
+                  <div class="wrap">
+                    <div class="likes ng-binding">6</div>
+                    <div class="comments ng-binding">0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button type="button" class="slick-next slick-arrow arrow" style="display: block;" aria-disabled="false"></button>
+
+        <div id="slider-control">
+          <%= link_to "#itemslider", :class=> "carousel-control slick-prev slick-arrow arrow", :data=>{ :slide=>"prev"} do %>
+          <%= image_tag "left.svg", :alt=>"Left", :class=>"img-responsive" %>
+          <% end %>
+          <!-- <a class="left carousel-control" href="#itemslider" data-slide="prev"><%# image_tag "https://s12.postimg.org/uj3ffq90d/arrow_left.png", :alt=>"Left", :class=>"img-responsive" %></a> -->
+          <a class="right carousel-control slick-next slick-arrow arrow" href="#itemslider" data-slide="next">
+            <%= image_tag "right.svg", :alt=>"Right", :class=>"img-responsive"%>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Item slider end-->
+
+<style>
+body {
+  font-family: Verdana, sans-serif;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row > .column {
+  padding: 0 8px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #FFF;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.close {
+  color: black !important;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mySlides {
+  display: none;
+}
+
+.cursor {
+  cursor: pointer
+}
+
+/*.prev,
+.next {
+cursor: pointer;
+position: absolute;
+top: 50%;
+width: auto;
+padding: 16px;
+margin-top: -50px;
+color: white;
+font-weight: bold;
+font-size: 20px;
+transition: 0.6s ease;
+border-radius: 0 3px 3px 0;
+user-select: none;
+-webkit-user-select: none;
+}*/
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+img {
+  margin-bottom: -4px;
+}
+
+.caption-container {
+  text-align: center;
+  background-color: black;
+  padding: 2px 16px;
+  color: white;
+}
+
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+img.hover-shadow {
+  transition: 0.3s
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+
+</style>
+
+
+<div id="myModal" class="modal">
+  <button id="closeModal" onclick="closeModal()"></button>
+  <div class="">
+
+    <div data-ui-view="" class="ng-scope">
+    <style class="ng-binding ng-scope">
+    #expandContainer #expandMode #expandContent {
+      height: 480px;
+    }
+    </style>
+    <div id="expandContainer" class="ng-scope light">
+      <div id="expandMode" >
+        <div class="sliderContainer">
+          <slick id="mainSlick" class="ng-scope ng-isolate-scope slick-initialized slick-slider" style="display: block;">
+            <div class="slick-list draggable">
+              <div class="slick-track" style="opacity: 1; width: 50000px;">
+                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
+                  <div class="mySlides expandImage ng-scope" >
+                    <%= image_tag "image_01.jpg", :class=>"ng-scope" %>
+
+                    <script type="text/javascript">
+
+                    $(document).ready(function(){
+                      // $("#mediaLikesCount .ng-binding").val = "22";
+                      // alert("22");
+                    });
+
+                    </script>
+
+
+                    <div class="demo">
+                      <div class="likes">22</div>
+                      <div class="comments">412</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
+                  <div class="mySlides expandImage ng-scope">
+                    <%= image_tag "image_02.jpg", :class=>"ng-scope" %>
+                  </div>
+                </div>
+                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
+                  <div class="mySlides expandImage ng-scope">
+                    <%= image_tag "image_03.jpg", :class=>"ng-scope" %>
+                  </div>
+                </div>
+                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
+                  <div class="mySlides expandImage ng-scope">
+                    <%= image_tag "image_02.jpg", :class=>"ng-scope" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </slick>
+        </div>
+
+        <div id="expandContent">
+          <div id="userDetail">
+            <a class="userImage">
+              <%= image_tag "criativitta-logo.png" %>
+            </a>
+            <div class="userInfo noLocation">
+              <p class="userName ng-binding">criativitta</p>
+              <p class="location ng-binding">Passo Fundo/RS</p>
+            </div>
+          </div>
+          <div id="mediaInfo">
+            <div id="mediaLikesCount">
+              <i></i>
+              <div class="ng-binding">4</div>
+            </div>
+            <div id="mediaCommentsCount">
+              <i></i>
+              <div class="ng-binding">0</div>
+            </div>
+            <div id="mediaCreatedTime">
+              <div class="ng-binding">25&nbsp;sem</div>
+            </div>
+          </div>
+          <div class="scroll-wrapper wrap scrollbar-inner" style="position: relative;">
+            <div class="wrap scrollbar-inner scroll-content" id="scrollbarComments" style="height: 350px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
+              <div id="description">
+                <p class="ng-binding">
+                  <span class="userName ng-binding"></span>
+                </p>
+              </div>
+              <div id="comments" >
+                <ul>
+                  <!-- ngRepeat: comment in state.mediasId[state.currentIndex].comments -->
+                </ul>
+              </div>
+            </div>
+            <div class="scroll-element scroll-x">
+              <div class="scroll-element_outer">
+                <div class="scroll-element_size">
+                </div>
+                <div class="scroll-element_track"></div>
+                <div class="scroll-bar" style="width: 100px;"></div>
+              </div>
+            </div>
+            <div class="scroll-element scroll-y">
+              <div class="scroll-element_outer">
+                <div class="scroll-element_size"></div>
+                <div class="scroll-element_track"></div>
+                <div class="scroll-bar" style="height: 100px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <button onclick="plusSlides(-1)" type="button" class="prev-slide-expand prev slick-prev  slick-arrow slick-primary" id="prevArrow" aria-disabled="false" style="display: block;"></button>
+
+  <button onclick="plusSlides(1)" type="button" class="next-slide-expand next slick-next slick-arrow slick-primary" id="nextArrow" style="display: block;" aria-disabled="false"></button>
+
+</div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('myModal').style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById('myModal').style.display = "none";
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("mediaLikesCount").getElementsByClassName("mediaLikesCount")[0];
+
+
+// ng-binding
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  // dots[slideIndex-1].className += " active";
+  // captionText.getElementsByClassName("mediaLikesCount").innerHTML = dots[slideIndex-1].getElementsByClassName("likes")[0].value;
+  // var list = document.getElementById("foo").getElementsByClassName("bar");
+  if (captionText && captionText.length > 0) {
+    captionText[0].innerHTML = "Goodbye world!";
+  }
+  // captionText.innerHTML = "Goodbye";
+}
+</script>
