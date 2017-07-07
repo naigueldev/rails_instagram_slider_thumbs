@@ -453,7 +453,7 @@ input::-webkit-outer-spin-button {
   padding-left: 40px
 }
 #expandContainer #expandMode #expandContent .wrap {
-  overflow: hidden;
+  overflow: auto;
   height: calc(100% - 70px - 60px)
 }
 #expandContainer #expandMode #expandContent .userImage {

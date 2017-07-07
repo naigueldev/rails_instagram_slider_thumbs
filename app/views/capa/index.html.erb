@@ -1,11 +1,26 @@
 <%= stylesheet_link_tag 'our_slider_feed_insta.css' %>
 
 
+<div id="row_fotos" class="pi-row">
+
+  <div id="box_fotos" class="pi-col-sm-12 pi-padding-bottom-50 justificado">
+
+    <%# @images.each do |instagram| %>
+    <!-- <a href="https://www.instagram.com/p/<%# instagram[1] %>" target="_blank">
+      <div class="box-fotos-listagem">
+        <%# image_tag instagram[0] %>
+      </div>
+    </a> -->
+    <%# end %>
+
+  </div>
+
+
+</div>
+
+
+
 <!-- TODO SLIDER INSTAGRAM -->
-<style media="screen">
-
-
-</style>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -22,9 +37,7 @@ $(document).ready(function(){
         itemToClone = $(this).siblings(':first');
       }
 
-      itemToClone.children(':first-child').clone()
-      .addClass("cloneditem-"+(i))
-      .appendTo($(this));
+      itemToClone.children(':first-child').clone().addClass("cloneditem-"+(i)).appendTo($(this));
     }
   });
 });
@@ -41,59 +54,47 @@ $(document).ready(function(){
 
 
         <div class="carousel-inner sliderImagesSection">
-          <div class="item active ng-scope slick-slide slick-active">
-            <div class="col-xs-12 col-sm-6 col-md-2">
-              <div class="imgContainer ng-scope slick-slide slick-active" >
-                <%= image_tag "image_01.jpg", :class=>"img-responsive center-block" %>
-                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(1)">
-                  <div class="wrap">
-                    <div class="likes ng-binding">6</div>
-                    <div class="comments ng-binding">0</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="item ng-scope slick-slide slick-active">
-            <div class="col-xs-12 col-sm-6 col-md-2">
-              <div class="imgContainer ng-scope slick-slide slick-active" >
-                <%= image_tag "image_02.jpg", :class=>"img-responsive center-block" %>
-                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(2)">
-                  <div class="wrap">
-                    <div class="likes ng-binding">6</div>
-                    <div class="comments ng-binding">0</div>
+
+          <% @images.each_with_index do |instagram , index| %>
+            <% if index == 0 %>
+              <div class="item active ng-scope slick-slide slick-active">
+                <div class="col-xs-12 col-sm-6 col-md-2">
+                  <div class="imgContainer ng-scope slick-slide slick-active" >
+                    <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
+                    <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
+                      <div class="wrap">
+                        <% if instagram[4] == true %>
+                          <div class="likes ng-binding"><%= instagram[5] %></div>
+                        <% else %>
+                          <div class="likes ng-binding"><%= instagram[3] %></div>
+                        <% end %>
+                        <div class="comments ng-binding"><%= instagram[2] %></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="item ng-scope slick-slide slick-active">
-            <div class="col-xs-12 col-sm-6 col-md-2">
-              <div class="imgContainer ng-scope slick-slide slick-active" >
-                <%= image_tag "image_03.jpg", :class=>"img-responsive center-block" %>
-                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(3)">
-                  <div class="wrap">
-                    <div class="likes ng-binding">6</div>
-                    <div class="comments ng-binding">0</div>
+            <% else %>
+              <div class="item ng-scope slick-slide slick-active">
+                <div class="col-xs-12 col-sm-6 col-md-2">
+                  <div class="imgContainer ng-scope slick-slide slick-active" >
+                    <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
+                    <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
+                      <div class="wrap">
+                        <% if instagram[4] == true %>
+                          <div class="likes ng-binding"><%= instagram[5] %></div>
+                        <% else %>
+                          <div class="likes ng-binding"><%= instagram[3] %></div>
+                        <% end %>
+                        <div class="comments ng-binding"><%= instagram[2] %></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="item ng-scope slick-slide slick-active">
-            <div class="col-xs-12 col-sm-6 col-md-2">
-              <div class="imgContainer ng-scope slick-slide slick-active" >
-                <%= image_tag "image_02.jpg", :class=>"img-responsive center-block" %>
-                <div class="imageLikesComments imageShowHoverData" onclick="openModal();currentSlide(4)">
-                  <div class="wrap">
-                    <div class="likes ng-binding">6</div>
-                    <div class="comments ng-binding">0</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <% end %>
+          <% end %>
 
         </div>
 
@@ -103,7 +104,6 @@ $(document).ready(function(){
           <%= link_to "#itemslider", :class=> "carousel-control slick-prev slick-arrow arrow", :data=>{ :slide=>"prev"} do %>
           <%= image_tag "left.svg", :alt=>"Left", :class=>"img-responsive" %>
           <% end %>
-          <!-- <a class="left carousel-control" href="#itemslider" data-slide="prev"><%# image_tag "https://s12.postimg.org/uj3ffq90d/arrow_left.png", :alt=>"Left", :class=>"img-responsive" %></a> -->
           <a class="right carousel-control slick-next slick-arrow arrow" href="#itemslider" data-slide="next">
             <%= image_tag "right.svg", :alt=>"Right", :class=>"img-responsive"%>
           </a>
@@ -260,84 +260,85 @@ img.hover-shadow {
     }
     </style>
     <div id="expandContainer" class="ng-scope light">
-      <div id="expandMode" >
-        <div class="sliderContainer">
-          <slick id="mainSlick" class="ng-scope ng-isolate-scope slick-initialized slick-slider" style="display: block;">
-            <div class="slick-list draggable">
-              <div class="slick-track" style="opacity: 1; width: 50000px;">
-                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
-                  <div class="mySlides expandImage ng-scope" >
-                    <%= image_tag "image_01.jpg", :class=>"ng-scope" %>
 
-                    <script type="text/javascript">
-
-                    $(document).ready(function(){
-                      // $("#mediaLikesCount .ng-binding").val = "22";
-                      // alert("22");
-                    });
-
-                    </script>
-
-
-                    <div class="demo">
-                      <div class="likes">22</div>
-                      <div class="comments">412</div>
+      <% @images.each_with_index do |instagram , index| %>
+        <div id="expandMode" class="expandMode">
+          <%= link_to "https://www.instagram.com/p/#{instagram[1]}", :class=>"myLinks", :target=> "_blank" do %>
+            <div class="sliderContainer">
+              <slick id="mainSlick" class="ng-scope ng-isolate-scope slick-initialized slick-slider" style="display: block;">
+                <div class="slick-list draggable">
+                  <div class="slick-track" style="opacity: 1; width: 50000px;">
+                    <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
+                      <div class="mySlides expandImage ng-scope" >
+                        <%= image_tag instagram[0], :class=>"ng-scope" %>
+                        <%# image_tag "image_01.jpg", :class=>"ng-scope" %>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
-                  <div class="mySlides expandImage ng-scope">
-                    <%= image_tag "image_02.jpg", :class=>"ng-scope" %>
-                  </div>
-                </div>
-                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
-                  <div class="mySlides expandImage ng-scope">
-                    <%= image_tag "image_03.jpg", :class=>"ng-scope" %>
-                  </div>
-                </div>
-                <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
-                  <div class="mySlides expandImage ng-scope">
-                    <%= image_tag "image_02.jpg", :class=>"ng-scope" %>
-                  </div>
-                </div>
-              </div>
+              </slick>
             </div>
-          </slick>
-        </div>
+          <% end %>
 
-        <div id="expandContent">
+        <div id="expandContent" class="myComments">
           <div id="userDetail">
             <a class="userImage">
-              <%= image_tag "criativitta-logo.png" %>
+              <%= image_tag @photo_user_data[index][2] %>
             </a>
             <div class="userInfo noLocation">
-              <p class="userName ng-binding">criativitta</p>
-              <p class="location ng-binding">Passo Fundo/RS</p>
+              <p class="userName ng-binding"><%= @photo_user_data[index][1] %> </p>
+              <p class="location ng-binding">
+                <%= @photo_user_data[index][3] %>
+              </p>
             </div>
           </div>
           <div id="mediaInfo">
+
             <div id="mediaLikesCount">
               <i></i>
-              <div class="ng-binding">4</div>
+              <% if instagram[4] == true %>
+                <div class="ng-binding"><%= instagram[5] %></div>
+              <% else %>
+                <div class="ng-binding"><%= instagram[3] %></div>
+              <% end %>
             </div>
             <div id="mediaCommentsCount">
               <i></i>
-              <div class="ng-binding">0</div>
+              <div class="ng-binding"><%= instagram[2] %></div>
             </div>
             <div id="mediaCreatedTime">
-              <div class="ng-binding">25&nbsp;sem</div>
+              <div class="ng-binding"></div>
             </div>
           </div>
-          <div class="scroll-wrapper wrap scrollbar-inner" style="position: relative;">
+          <div class="scroll-wrapper wrap scrollbar-inner" style="position: relative;overflow: hidden;">
             <div class="wrap scrollbar-inner scroll-content" id="scrollbarComments" style="height: 350px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
               <div id="description">
                 <p class="ng-binding">
-                  <span class="userName ng-binding"></span>
+                  <span class="userName ng-binding"><%= @photo_user_data[index][1] %></span>
+                  <%= @photo_user_data[index][0].html_safe %>
                 </p>
               </div>
+
+
               <div id="comments" >
-                <ul>
-                  <!-- ngRepeat: comment in state.mediasId[state.currentIndex].comments -->
+                <ul style="padding-left: 0px;">
+                  <%# @images.each_with_index do |instagram , index| %>
+                  <% if @total_comments[index][0] > 0 %>
+                    <% total = @total_comments[index][0] %>
+                    <%# @comments.each do |comments| %>
+                    <% for j in 0..total-1 %>
+                    <% p "View comentarios #{j}: #{@comments[j][0]}" %>
+                    <li class="comment ng-scope">
+                      <div class="commentContent">
+                        <p class="commentUsername ng-binding"><%= @comments[1][1] %></p>
+                        <p class="commentBody ng-binding"><%= @comments[1][0] %></p>
+                      </div>
+                    </li>
+                    <% end %>
+                    <%# end %>
+                  <% end %>
+
+
                 </ul>
               </div>
             </div>
@@ -359,6 +360,8 @@ img.hover-shadow {
           </div>
         </div>
       </div>
+      <% end %>
+
     </div>
   </div>
 
@@ -376,6 +379,13 @@ img.hover-shadow {
 <script>
 function openModal() {
   document.getElementById('myModal').style.display = "block";
+}
+function params_code(code) {
+
+
+  // $.get("/code_insta?code="+ code, function(){});
+
+
 }
 
 function closeModal() {
@@ -395,27 +405,29 @@ function currentSlide(n) {
 
 function showSlides(n) {
   var i;
+  var expandMode = document.getElementsByClassName("expandMode");
   var slides = document.getElementsByClassName("mySlides");
+  var comments = document.getElementsByClassName("myComments");
   var dots = document.getElementsByClassName("demo");
   var captionText = document.getElementById("mediaLikesCount").getElementsByClassName("mediaLikesCount")[0];
 
-
-// ng-binding
   if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < expandMode.length; i++) {
+    expandMode[i].style.display = "none";
+  }
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
+  }
+  for (i = 0; i < comments.length; i++) {
+    comments[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
+  expandMode[slideIndex-1].style.display = "block";
   slides[slideIndex-1].style.display = "block";
-  // dots[slideIndex-1].className += " active";
-  // captionText.getElementsByClassName("mediaLikesCount").innerHTML = dots[slideIndex-1].getElementsByClassName("likes")[0].value;
-  // var list = document.getElementById("foo").getElementsByClassName("bar");
-  if (captionText && captionText.length > 0) {
-    captionText[0].innerHTML = "Goodbye world!";
-  }
-  // captionText.innerHTML = "Goodbye";
+  comments[slideIndex-1].style.display = "block";
+
 }
 </script>
