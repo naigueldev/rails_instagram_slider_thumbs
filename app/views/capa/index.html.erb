@@ -325,9 +325,9 @@ img.hover-shadow {
                   <%# @images.each_with_index do |instagram , index| %>
                   <% if @total_comments[index][0] > 0 %>
                     <% total = @total_comments[index][0] %>
-                    <%# @comments.each do |comments| %>
+                    <% p "SOMENTE vet_comenarios = #{@vet_comenarios}" %>
+
                     <% for j in 0..total-1 %>
-                    <% p "View comentarios #{j}: #{@comments[j][0]}" %>
                     <li class="comment ng-scope">
                       <div class="commentContent">
                         <p class="commentUsername ng-binding"><%= @comments[1][1] %></p>
@@ -335,7 +335,6 @@ img.hover-shadow {
                       </div>
                     </li>
                     <% end %>
-                    <%# end %>
                   <% end %>
 
 

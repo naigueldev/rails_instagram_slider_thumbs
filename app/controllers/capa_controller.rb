@@ -15,7 +15,9 @@ class CapaController < ApplicationController
       format.js
     end
   end
-
+  def initialize
+    @vet_comenarios = []
+  end
   def get_instagram(index)
     # Bloco referente ao feed do instagram
     require 'net/http'
@@ -29,6 +31,7 @@ class CapaController < ApplicationController
     @photo_user_data = []
     # @comments = []
     @total_comments = []
+    
     unless resp == false
       parsed_json = JSON.parse(resp.body)
       min = index.to_i
@@ -70,14 +73,20 @@ class CapaController < ApplicationController
 
             total = @total_comments[i][0]
             p "Total = #{total}"
+
             if total > 0
               @comments = []
               for j in 0..total-1
                 @comments << [ json_parsed['graphql']['shortcode_media']['edge_media_to_comment']['edges'][j]['node']['text'],
-                json_parsed['graphql']['shortcode_media']['edge_media_to_comment']['edges'][j]['node']['owner']['username'] ]
-                p "Comentario posicao #{j}: #{@comments[j][0]}"
+                  json_parsed['graphql']['shortcode_media']['edge_media_to_comment']['edges'][j]['node']['owner']['username'] ]
+
+                p "Comentario posicao [#{j}]: #{@comments[j][0]}"
               end
+              @vet_comenarios.insert(i, @comments)
             end
+            p "@vet_comenarios[i] = #{@vet_comenarios}"
+            # p "@comments.values[0] = #{@comments.values[0]}"
+
 
           end
 
