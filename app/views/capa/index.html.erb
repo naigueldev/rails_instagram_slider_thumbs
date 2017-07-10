@@ -1,30 +1,9 @@
 <%= stylesheet_link_tag 'our_slider_feed_insta.css' %>
 
 
-<div id="row_fotos" class="pi-row">
-
-  <div id="box_fotos" class="pi-col-sm-12 pi-padding-bottom-50 justificado">
-
-    <%# @images.each do |instagram| %>
-    <!-- <a href="https://www.instagram.com/p/<%# instagram[1] %>" target="_blank">
-      <div class="box-fotos-listagem">
-        <%# image_tag instagram[0] %>
-      </div>
-    </a> -->
-    <%# end %>
-
-  </div>
-
-
-</div>
-
-
-
-<!-- TODO SLIDER INSTAGRAM -->
-
 <script type="text/javascript">
-$(document).ready(function(){
 
+$(document).ready(function(){
   // $('#itemslider').carousel({ interval: 3000 });
 
   $('.carousel-showmanymoveone .item').each(function(){
@@ -60,7 +39,7 @@ $(document).ready(function(){
             <% if index == 0 %>
               <div class="item active ng-scope slick-slide slick-active">
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                  <div class="imgContainer ng-scope slick-slide slick-active" >
+                  <div class="ng-scope slick-slide slick-active" >
                     <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
                     <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
                       <div class="wrap">
@@ -78,7 +57,7 @@ $(document).ready(function(){
             <% else %>
               <div class="item ng-scope slick-slide slick-active">
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                  <div class="imgContainer ng-scope slick-slide slick-active" >
+                  <div class="ng-scope slick-slide slick-active" >
                     <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
                     <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
                       <div class="wrap">
@@ -310,8 +289,8 @@ img.hover-shadow {
               <div class="ng-binding"></div>
             </div>
           </div>
-          <div class="scroll-wrapper wrap scrollbar-inner" style="position: relative;overflow: hidden;">
-            <div class="wrap scrollbar-inner scroll-content" id="scrollbarComments" style="height: 350px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
+          <div class="scroll-wrapper wrap scrollbar-inner" style="position: relative;overflow: hidden;height: 470px;">
+            <div class="wrap scrollbar-inner scroll-content" id="scrollbarComments" style="height: 470px;margin-bottom: 0px;margin-right: 0px;max-height: none;">
               <div id="description">
                 <p class="ng-binding">
                   <span class="userName ng-binding"><%= @photo_user_data[index][1] %></span>
@@ -322,18 +301,17 @@ img.hover-shadow {
 
               <div id="comments" >
                 <ul style="padding-left: 0px;">
-                  <%# @images.each_with_index do |instagram , index| %>
+
                   <% if @total_comments[index][0] > 0 %>
                     <% total = @total_comments[index][0] %>
-                    <% p "SOMENTE vet_comenarios = #{@vet_comenarios}" %>
-
                     <% for j in 0..total-1 %>
-                    <li class="comment ng-scope">
-                      <div class="commentContent">
-                        <p class="commentUsername ng-binding"><%= @comments[1][1] %></p>
-                        <p class="commentBody ng-binding"><%= @comments[1][0] %></p>
-                      </div>
-                    </li>
+                      <li class="comment ng-scope">
+                        <div class="commentContent">
+                          <p class="commentUsername ng-binding"><%= @comments[@start][1] %></p>
+                          <p class="commentBody ng-binding"><%= (@comments[@start][0]).html_safe %></p>
+                        </div>
+                      </li>
+                      <% @start += 1 %>
                     <% end %>
                   <% end %>
 
@@ -341,7 +319,7 @@ img.hover-shadow {
                 </ul>
               </div>
             </div>
-            <div class="scroll-element scroll-x">
+            <!-- <div class="scroll-element scroll-x">
               <div class="scroll-element_outer">
                 <div class="scroll-element_size">
                 </div>
@@ -355,7 +333,7 @@ img.hover-shadow {
                 <div class="scroll-element_track"></div>
                 <div class="scroll-bar" style="height: 100px;"></div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -380,11 +358,7 @@ function openModal() {
   document.getElementById('myModal').style.display = "block";
 }
 function params_code(code) {
-
-
   // $.get("/code_insta?code="+ code, function(){});
-
-
 }
 
 function closeModal() {

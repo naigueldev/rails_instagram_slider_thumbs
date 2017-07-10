@@ -1,5 +1,6 @@
 class CapaController < ApplicationController
 
+
   def index
     get_instagram(0)
   end
@@ -15,9 +16,7 @@ class CapaController < ApplicationController
       format.js
     end
   end
-  def initialize
-    @vet_comenarios = []
-  end
+
   def get_instagram(index)
     # Bloco referente ao feed do instagram
     require 'net/http'
@@ -29,9 +28,13 @@ class CapaController < ApplicationController
     end
     @images = [] # Limpa array para não printar fotos que já estão na view
     @photo_user_data = []
-    # @comments = []
     @total_comments = []
-    
+
+    @vet_comenarios = []
+    @comments = []
+    @start = 0
+
+    p "Começo = #{@comeco}"
     unless resp == false
       parsed_json = JSON.parse(resp.body)
       min = index.to_i
@@ -75,17 +78,16 @@ class CapaController < ApplicationController
             p "Total = #{total}"
 
             if total > 0
-              @comments = []
-              for j in 0..total-1
-                @comments << [ json_parsed['graphql']['shortcode_media']['edge_media_to_comment']['edges'][j]['node']['text'],
-                  json_parsed['graphql']['shortcode_media']['edge_media_to_comment']['edges'][j]['node']['owner']['username'] ]
 
-                p "Comentario posicao [#{j}]: #{@comments[j][0]}"
+              for j in 0..total-1
+                @comments.push([ json_parsed['graphql']['shortcode_media']['edge_media_to_comment']['edges'][j]['node']['text'],
+                  json_parsed['graphql']['shortcode_media']['edge_media_to_comment']['edges'][j]['node']['owner']['username'] ] )
+
+                p "Comentario posicao [#{j}]: #{@comments}"
               end
-              @vet_comenarios.insert(i, @comments)
+              # @vet_comenarios.insert(i, @comments)
             end
-            p "@vet_comenarios[i] = #{@vet_comenarios}"
-            # p "@comments.values[0] = #{@comments.values[0]}"
+            # p "@vet_comenarios[i] = #{@vet_comenarios}"
 
 
           end
