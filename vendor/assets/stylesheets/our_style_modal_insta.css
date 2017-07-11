@@ -1,0 +1,57 @@
+div#CommentsCount i {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20fill%3D%22%23171717%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2022%2020%22%20width%3D%2222%22%20height%3D%2220%22%3E%3Cpath%20d%3D%22M16.49%2017.84s-9.53%204.67-14.34-3.95C-2.65%205.27%207.93-2.97%2015.5%201.05c7.57%204.02%205.14%2011.86%204.45%2013.34l1.98%204.93z%22%2F%3E%3C%2Fsvg%3E")
+
+}
+
+#infoMedia>div#mediaLikesCount i {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2021%22%20width%3D%2224%22%20height%3D%2221%22%3E%3Cpath%20fill%3D%22%23171717%22%20d%3D%22M12.66%203.69s3.555-5.26%208.655-1.5c5.1%203.77%201.643%209.96-.51%2011.96-2.15%202-8.145%205.98-8.145%205.98s-5.64-3.65-8.656-5.94c-3.016-2.28-4.892-8.49%200-11.93%204.893-3.43%208.605%201.35%208.656%201.43z%22%2F%3E%3C%2Fsvg%3E")
+}
+
+
+#infoMedia>div>i {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-size: 15px auto;
+  background-position: 50%;
+  vertical-align: top;
+}
+#infoMedia>div>div {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 16px;
+  vertical-align: top;
+  padding-left: 2px;
+}
+#infoMedia>div {
+  display: inline-block;
+  width: auto;
+  height: 16px;
+}
+.box_comments{
+  position: absolute;
+  height: 425px;
+  width: 292px;
+  overflow: auto;
+}
+
+.box_comments span{
+  display: inline;
+}
+@media only screen and (max-width: 1200px) and (min-width: 940px){
+  .box_comments {
+    height: 370px !important;
+  }
+}
+@media only screen and (max-width: 940px){
+  .carouselGallery-scrollbox {
+    overflow-y: auto;
+  }
+
+  .box_comments {
+    position: absolute !important;
+    height: auto !important;
+    width: auto !important;
+    overflow: hidden !important;
+  }
+}

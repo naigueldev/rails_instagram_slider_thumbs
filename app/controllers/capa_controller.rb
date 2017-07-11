@@ -100,40 +100,8 @@ class CapaController < ApplicationController
     end
     # Fim do bloco referente ao feed do instagram
 
-
-
-
-
-
   end
 
-  def code_insta
-    # Bloco referente ao feed do instagram
-    index = 0
-    @short = params[:code]
-    shortcode = params[:code]
-    p "shortcode: "
-    p shortcode
-    require 'net/http'
-    url = 'https://www.instagram.com/p/'
-    url += shortcode.to_s + '/?__a=1'
-    p "URL: "
-    p url
-    url = URI.parse(url)
-    begin
-      resp = Net::HTTP.get_response(url)
-    rescue Errno::ETIMEDOUT, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse => e
-      resp = false
-    end
-    unless resp == false
-      parsed_json = JSON.parse(resp.body)
-      # p "parsed_json:"
-      # p parsed_json
 
-      @photo_user_data = [ parsed_json['graphql']['shortcode_media']['edge_media_to_caption']['edges'][0]['node']['text'] ]
-      p "@photo_user_data[0]: "
-      p @photo_user_data
-    end
-  end
 
 end

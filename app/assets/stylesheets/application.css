@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
- *= require our_slider_feed_insta
  *= require styles_insta_feed_expand
+ *= require modal_slider_insta_principal
+ *= require our_style_modal_insta
+ *= require insta_expand_style
  */

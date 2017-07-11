@@ -1,28 +1,5 @@
 <%= stylesheet_link_tag 'our_slider_feed_insta.css' %>
 
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-  // $('#itemslider').carousel({ interval: 3000 });
-
-  $('.carousel-showmanymoveone .item').each(function(){
-    var itemToClone = $(this);
-
-    for (var i=1;i<6;i++) {
-      itemToClone = itemToClone.next();
-
-      if (!itemToClone.length) {
-        itemToClone = $(this).siblings(':first');
-      }
-
-      itemToClone.children(':first-child').clone().addClass("cloneditem-"+(i)).appendTo($(this));
-    }
-  });
-});
-
-</script>
-<!-- Item slider-->
 <div class="container-fluid">
 
   <div class="row">
@@ -31,48 +8,45 @@ $(document).ready(function(){
 
         <button type="button" class="slick-prev slick-arrow arrow" aria-disabled="false" style="display: block;"></button>
 
-
         <div class="carousel-inner sliderImagesSection">
-
-
           <% @images.each_with_index do |instagram , index| %>
-            <% if index == 0 %>
-              <div class="item active ng-scope slick-slide slick-active">
-                <div class="col-xs-12 col-sm-6 col-md-2">
-                  <div class="ng-scope slick-slide slick-active" >
-                    <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
-                    <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
-                      <div class="wrap">
-                        <% if instagram[4] == true %>
-                          <div class="likes ng-binding"><%= instagram[5] %></div>
-                        <% else %>
-                          <div class="likes ng-binding"><%= instagram[3] %></div>
-                        <% end %>
-                        <div class="comments ng-binding"><%= instagram[2] %></div>
-                      </div>
-                    </div>
+          <% if index == 0 %>
+          <div class="item active ng-scope slick-slide slick-active">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-padding-left-right">
+              <div class="imgContainerHover ng-scope slick-slide slick-active" >
+                <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
+                <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
+                  <div class="wrap">
+                    <% if instagram[4] == true %>
+                    <div class="likes ng-binding"><%= instagram[5] %></div>
+                    <% else %>
+                    <div class="likes ng-binding"><%= instagram[3] %></div>
+                    <% end %>
+                    <div class="comments ng-binding"><%= instagram[2] %></div>
                   </div>
                 </div>
               </div>
-            <% else %>
-              <div class="item ng-scope slick-slide slick-active">
-                <div class="col-xs-12 col-sm-6 col-md-2">
-                  <div class="ng-scope slick-slide slick-active" >
-                    <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
-                    <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
-                      <div class="wrap">
-                        <% if instagram[4] == true %>
-                          <div class="likes ng-binding"><%= instagram[5] %></div>
-                        <% else %>
-                          <div class="likes ng-binding"><%= instagram[3] %></div>
-                        <% end %>
-                        <div class="comments ng-binding"><%= instagram[2] %></div>
-                      </div>
-                    </div>
+            </div>
+          </div>
+          <% else %>
+          <div class="item ng-scope slick-slide slick-active">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-padding-left-right">
+              <div class="imgContainerHover ng-scope slick-slide slick-active" >
+                <%= image_tag instagram[0], :class=>"img-responsive center-block" %>
+                <div class="imageLikesComments imageShowHoverData" onclick='openModal();currentSlide(<%= index + 1 %>);'>
+                  <div class="wrap">
+                    <% if instagram[4] == true %>
+                    <div class="likes ng-binding"><%= instagram[5] %></div>
+                    <% else %>
+                    <div class="likes ng-binding"><%= instagram[3] %></div>
+                    <% end %>
+                    <div class="comments ng-binding"><%= instagram[2] %></div>
                   </div>
                 </div>
               </div>
-            <% end %>
+            </div>
+          </div>
+          <% end %>
           <% end %>
 
         </div>
@@ -91,316 +65,99 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
-<!-- Item slider end-->
 
 <style>
-body {
-  font-family: Verdana, sans-serif;
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.row > .column {
-  padding: 0 8px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.column {
-  float: left;
-  width: 25%;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: #FFF;
-}
-
-.modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  width: 90%;
-  max-width: 1200px;
-}
-
-.close {
-  color: black !important;
-  position: absolute;
-  top: 10px;
-  right: 25px;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #999;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.mySlides {
-  display: none;
-}
-
-.cursor {
-  cursor: pointer
-}
-
-/*.prev,
-.next {
-cursor: pointer;
-position: absolute;
-top: 50%;
-width: auto;
-padding: 16px;
-margin-top: -50px;
-color: white;
-font-weight: bold;
-font-size: 20px;
-transition: 0.6s ease;
-border-radius: 0 3px 3px 0;
-user-select: none;
--webkit-user-select: none;
-}*/
-
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-
-
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-img {
-  margin-bottom: -4px;
-}
-
-.caption-container {
-  text-align: center;
-  background-color: black;
-  padding: 2px 16px;
-  color: white;
-}
-
-.demo {
-  opacity: 0.6;
-}
-
-.active,
-.demo:hover {
-  opacity: 1;
-}
-
-img.hover-shadow {
-  transition: 0.3s
-}
-
-.hover-shadow:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
-}
 
 
 </style>
 
+<div id="myModal" class="carouselGallery-wrapper modal">
 
-<div id="myModal" class="modal">
-  <button id="closeModal" onclick="closeModal()"></button>
-  <div class="">
+  <span id="closeModal" onclick="closeModal()" class="icons close-icon"></span>
 
-    <div data-ui-view="" class="ng-scope">
-    <style class="ng-binding ng-scope">
-    #expandContainer #expandMode #expandContent {
-      height: 480px;
-    }
-    </style>
-    <div id="expandContainer" class="ng-scope light">
+
+
+  <div id="expandContainer" class="carouselGallery-modal">
+    <span class="carouselGallery-left disabled">
+      <span class="icons icon-arrow-left6" onclick="plusSlides(-1)"></span>
+    </span>
+    <span class="carouselGallery-right">
+      <span class="icons icon-arrow-right6" onclick="plusSlides(1)"></span>
+    </span>
+    <div class="container">
 
       <% @images.each_with_index do |instagram , index| %>
-        <div id="expandMode" class="expandMode">
-          <%= link_to "https://www.instagram.com/p/#{instagram[1]}", :class=>"myLinks", :target=> "_blank" do %>
-            <div class="sliderContainer">
-              <slick id="mainSlick" class="ng-scope ng-isolate-scope slick-initialized slick-slider" style="display: block;">
-                <div class="slick-list draggable">
-                  <div class="slick-track" style="opacity: 1; width: 50000px;">
-                    <div class="ng-scope slick-slide" style="position: relative; left: 0px; top: 0px; z-index: 998;">
-                      <div class="mySlides expandImage ng-scope" >
-                        <%= image_tag instagram[0], :class=>"ng-scope" %>
-                        <%# image_tag "image_01.jpg", :class=>"ng-scope" %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </slick>
-            </div>
+
+
+      <div class="carouselGallery-scrollbox expandMode" style="max-height:849px">
+        <div class="carouselGallery-modal-image mySlides">
+          <%= link_to "https://www.instagram.com/p/#{instagram[1]}", :target=> "_blank" do %>
+          <%= image_tag instagram[0]  %>
           <% end %>
 
-        <div id="expandContent" class="myComments">
-          <div id="userDetail">
-            <a class="userImage">
-              <%= image_tag @photo_user_data[index][2] %>
-            </a>
-            <div class="userInfo noLocation">
-              <p class="userName ng-binding"><%= @photo_user_data[index][1] %> </p>
-              <p class="location ng-binding">
-                <%= @photo_user_data[index][3] %>
-              </p>
-            </div>
-          </div>
-          <div id="mediaInfo">
+        </div>
+        <div class="carouselGallery-modal-text myComments">
 
-            <div id="mediaLikesCount">
-              <i></i>
-              <% if instagram[4] == true %>
+
+
+          <a class="userImage" style="width: 33px;height: 33px;display: inline-block;">
+            <%= image_tag @photo_user_data[index][2] , :style=>"width: 100%;height: 100%;border-radius: 50%;border: 1px solid hsla(0, 0%, 9%, .07);" %>
+          </a>
+
+          <span class="carouselGallery-modal-username" style="height: 24px;display: inline-block;vertical-align: top;width: auto;padding-left: 4px;">
+            <a href="https://instagram.com/p/<%= instagram[1] %>/"><%= @photo_user_data[index][1] %></a>
+          </span>
+          <span class="carouselGallery-modal-location"><%= @photo_user_data[index][3] %></span>
+
+
+          <span class="carouselGallery-item-modal-likes">
+
+            <div id="infoMedia">
+              <div id="mediaLikesCount">
+                <i></i>
+                <% if instagram[4] == true %>
                 <div class="ng-binding"><%= instagram[5] %></div>
-              <% else %>
+                <% else %>
                 <div class="ng-binding"><%= instagram[3] %></div>
-              <% end %>
+                <% end %>
+              </div>
+              <div id="CommentsCount">
+                <i></i>
+                <div class="ng-binding"><%= instagram[2] %></div>
+              </div>
             </div>
-            <div id="mediaCommentsCount">
-              <i></i>
-              <div class="ng-binding"><%= instagram[2] %></div>
-            </div>
-            <div id="mediaCreatedTime">
-              <div class="ng-binding"></div>
-            </div>
+
+          </span>
+
+          <div class="box_comments">
+
+            <span class="carouselGallery-modal-imagetext" style="margin-bottom: 20px;">
+              <p><span style="font-weight: 700;"><%= @photo_user_data[index][1] %></span>
+                <%= @photo_user_data[index][0] %>
+              </p>
+            </span>
+
+            <% if @total_comments[index][0] > 0 %>
+            <% total = @total_comments[index][0] %>
+            <% for j in 0..total-1 %>
+            <span class="carouselGallery-modal-imagetext">
+              <p><span style="font-weight: 700;"><%= @comments[@start][1] %></span>
+                <%= @comments[@start][0] %>
+              </p>
+            </span>
+
+            <% @start += 1 %>
+            <% end %>
+            <% end %>
+
           </div>
-          <div class="scroll-wrapper wrap scrollbar-inner" style="position: relative;overflow: hidden;height: 470px;">
-            <div class="wrap scrollbar-inner scroll-content" id="scrollbarComments" style="height: 470px;margin-bottom: 0px;margin-right: 0px;max-height: none;">
-              <div id="description">
-                <p class="ng-binding">
-                  <span class="userName ng-binding"><%= @photo_user_data[index][1] %></span>
-                  <%= @photo_user_data[index][0].html_safe %>
-                </p>
-              </div>
 
 
-              <div id="comments" >
-                <ul style="padding-left: 0px;">
 
-                  <% if @total_comments[index][0] > 0 %>
-                    <% total = @total_comments[index][0] %>
-                    <% for j in 0..total-1 %>
-                      <li class="comment ng-scope">
-                        <div class="commentContent">
-                          <p class="commentUsername ng-binding"><%= @comments[@start][1] %></p>
-                          <p class="commentBody ng-binding"><%= (@comments[@start][0]).html_safe %></p>
-                        </div>
-                      </li>
-                      <% @start += 1 %>
-                    <% end %>
-                  <% end %>
-
-
-                </ul>
-              </div>
-            </div>
-            <!-- <div class="scroll-element scroll-x">
-              <div class="scroll-element_outer">
-                <div class="scroll-element_size">
-                </div>
-                <div class="scroll-element_track"></div>
-                <div class="scroll-bar" style="width: 100px;"></div>
-              </div>
-            </div>
-            <div class="scroll-element scroll-y">
-              <div class="scroll-element_outer">
-                <div class="scroll-element_size"></div>
-                <div class="scroll-element_track"></div>
-                <div class="scroll-bar" style="height: 100px;"></div>
-              </div>
-            </div> -->
-          </div>
         </div>
       </div>
-      <% end %>
 
+      <% end %>
     </div>
   </div>
-
-
-
-
-
-  <button onclick="plusSlides(-1)" type="button" class="prev-slide-expand prev slick-prev  slick-arrow slick-primary" id="prevArrow" aria-disabled="false" style="display: block;"></button>
-
-  <button onclick="plusSlides(1)" type="button" class="next-slide-expand next slick-next slick-arrow slick-primary" id="nextArrow" style="display: block;" aria-disabled="false"></button>
-
 </div>
-</div>
-
-<script>
-function openModal() {
-  document.getElementById('myModal').style.display = "block";
-}
-function params_code(code) {
-  // $.get("/code_insta?code="+ code, function(){});
-}
-
-function closeModal() {
-  document.getElementById('myModal').style.display = "none";
-}
-
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var expandMode = document.getElementsByClassName("expandMode");
-  var slides = document.getElementsByClassName("mySlides");
-  var comments = document.getElementsByClassName("myComments");
-  var dots = document.getElementsByClassName("demo");
-  var captionText = document.getElementById("mediaLikesCount").getElementsByClassName("mediaLikesCount")[0];
-
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < expandMode.length; i++) {
-    expandMode[i].style.display = "none";
-  }
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < comments.length; i++) {
-    comments[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  expandMode[slideIndex-1].style.display = "block";
-  slides[slideIndex-1].style.display = "block";
-  comments[slideIndex-1].style.display = "block";
-
-}
-</script>

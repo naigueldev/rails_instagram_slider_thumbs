@@ -5,32 +5,7 @@
 .pull-right {
   float: right
 }
-input[type=email],
-input[type=number] {
-  direction: ltr;
-  text-align: right
-}
-html {
-  -webkit-font-smoothing: antialiased
-}
-* {
-  background-repeat: no-repeat
-}
-input:focus,
-input:valid {
-  box-shadow: none;
-  outline: none
-}
-li:last-child,
-p:last-child,
-ul:last-child {
-  margin-bottom: 0
-}
-input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button {
-  appearance: none;
-  margin: 0
-}
+
 @keyframes sk-scaleout {
   0% {
     -webkit-transform: scale(0);
@@ -658,7 +633,6 @@ input::-webkit-outer-spin-button {
 
 
 
-/*-------------------------------*/
 #closeModal {
   position: fixed;
   top: 60px;
@@ -672,6 +646,7 @@ input::-webkit-outer-spin-button {
   background-repeat: no-repeat;
   outline: none;
   z-index: 9999;
+  cursor: pointer;
 }
 .prev-slide-expand {
   background-image: url("images/feed_left.svg") !important;
